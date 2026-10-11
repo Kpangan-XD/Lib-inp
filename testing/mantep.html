@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPancasila XI - Menjiwai Pancasila & Demokrasi UUD 1945</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            red: '#DC2626',
+                            darkred: '#991B1B',
+                            lightred: '#FEF2F2',
+                            gold: '#D97706',
+                            dark: '#0F172A',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 99px; }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; }
+        
+        @media print {
+            header, nav, button, .no-print { display: none !important; }
+            body { background: white !important; color: black !important; }
+            .print-only { display: block !important; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans antialiased min-h-screen flex flex-col selection:bg-red-500 selection:text-white transition-colors duration-300">
+
+    <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo & Title -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('materi')">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-red to-red-500 flex items-center justify-center text-white shadow-md shadow-red-500/20">
+                        <i class="fa-solid fa-shield-halved text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-slate-900 dark:text-white text-lg leading-tight flex items-center gap-2">
+                            EduPancasila <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-red-100 dark:bg-red-950/80 text-brand-red dark:text-red-400 border border-red-200 dark:border-red-900">Kelas XI</span>
+                        </h1>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Menjiwai Pancasila & Demokrasi UUD 1945</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Tabs Desktop -->
+                <nav class="hidden md:flex items-center space-x-1">
+                    <button id="nav-materi" onclick="switchTab('materi')" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 text-brand-red bg-red-50 dark:bg-red-950/40 border border-red-100 dark:border-red-900/50">
+                        <i class="fa-solid fa-book-open"></i> Materi Rangkuman
+                    </button>
+                    <button id="nav-flashcards" onclick="switchTab('flashcards')" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800">
+                        <i class="fa-solid fa-layer-group"></i> Flashcards
+                    </button>
+                    <button id="nav-simulasi" onclick="switchTab('simulasi')" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800">
+                        <i class="fa-solid fa-pen-to-square"></i> Simulasi Ujian
+                    </button>
+                    <button id="nav-performa" onclick="switchTab('performa')" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800">
+                        <i class="fa-solid fa-chart-pie"></i> Performa
+                    </button>
+                </nav>
+
+                <!-- Tools & Controls -->
+                <div class="flex items-center space-x-2">
+                    <button onclick="toggleAudio()" id="audio-toggle-btn" title="Toggle Suara Sfx" class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-volume-high text-sm"></i>
+                    </button>
+                    <button onclick="toggleDarkMode()" title="Toggle Dark Mode" class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-moon dark:hidden text-sm"></i>
+                        <i class="fa-solid fa-sun hidden dark:block text-amber-400 text-sm"></i>
+                    </button>
+                    <button onclick="startQuickQuiz()" class="hidden sm:flex text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-white transition shadow-sm items-center gap-1.5">
+                        <i class="fa-solid fa-bolt text-amber-400 dark:text-amber-500"></i> Tes Cepat
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-2 py-1.5 flex justify-around text-xs font-medium">
+            <button id="mob-materi" onclick="switchTab('materi')" class="mob-btn flex-1 py-1.5 text-center text-brand-red font-bold">
+                <i class="fa-solid fa-book-open block text-base mb-0.5"></i> Materi
+            </button>
+            <button id="mob-flashcards" onclick="switchTab('flashcards')" class="mob-btn flex-1 py-1.5 text-center text-slate-600 dark:text-slate-400">
+                <i class="fa-solid fa-layer-group block text-base mb-0.5"></i> Cards
+            </button>
+            <button id="mob-simulasi" onclick="switchTab('simulasi')" class="mob-btn flex-1 py-1.5 text-center text-slate-600 dark:text-slate-400">
+                <i class="fa-solid fa-pen-to-square block text-base mb-0.5"></i> Ujian
+            </button>
+            <button id="mob-performa" onclick="switchTab('performa')" class="mob-btn flex-1 py-1.5 text-center text-slate-600 dark:text-slate-400">
+                <i class="fa-solid fa-chart-pie block text-base mb-0.5"></i> Performa
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- ================= SECTION 1: MATERI PEMBELAJARAN ================= -->
+        <section id="sec-materi" class="tab-content space-y-6">
+            <!-- Hero Banner -->
+            <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-brand-darkred rounded-3xl p-6 sm:p-10 text-white shadow-xl relative overflow-hidden border border-slate-800">
+                <div class="absolute -right-10 -bottom-10 opacity-10 pointer-events-none">
+                    <i class="fa-solid fa-landmark text-[260px]"></i>
+                </div>
+                <div class="relative z-10 max-w-2xl space-y-3">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-xs font-semibold tracking-wider uppercase backdrop-blur-md border border-white/20">
+                        <i class="fa-solid fa-graduation-cap text-amber-400"></i> Modul Kurikulum Merdeka XI
+                    </span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight">
+                        Menjiwai Pancasila & Demokrasi UUD NRI 1945
+                    </h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        Pelajari sejarah lahirnya ideologi negara, perumusan BPUPK & PPKI, hakikat nilai Pancasila, serta pelaksanaan Demokrasi Pancasila sesuai konstitusi.
+                    </p>
+                    <div class="pt-2 flex flex-wrap gap-3">
+                        <button onclick="switchTab('simulasi')" class="bg-brand-red hover:bg-red-700 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition shadow-lg shadow-red-900/30 flex items-center gap-2">
+                            <i class="fa-solid fa-play text-xs"></i> Mulai Ujian 25 Soal
+                        </button>
+                        <button onclick="switchTab('flashcards')" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-5 py-2.5 rounded-xl text-sm font-bold backdrop-blur-md transition flex items-center gap-2">
+                            <i class="fa-solid fa-layer-group text-xs"></i> Latihan Flashcards
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Material Search & Chapters Workspace -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Left Chapter Navigator & Search -->
+                <div class="lg:col-span-1 space-y-4">
+                    <!-- Search Input -->
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
+                        <input type="text" id="materi-search" onkeyup="filterMateri()" placeholder="Cari topik, pasal, atau tokoh..." class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-red/50 transition">
+                    </div>
+
+                    <!-- Index Accordion -->
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 divide-y divide-slate-100 dark:divide-slate-800 shadow-sm overflow-hidden">
+                        <button onclick="scrollToChapter('chap-sejarah')" class="w-full text-left p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition flex items-center justify-between group">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-9 h-9 rounded-xl bg-red-100 dark:bg-red-950/80 text-brand-red dark:text-red-400 flex items-center justify-center font-black text-sm group-hover:scale-105 transition-transform">1</div>
+                                <div>
+                                    <h4 class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100">Sejarah Perumusan</h4>
+                                    <p class="text-[11px] text-slate-500 dark:text-slate-400">BPUPK, PPKI & Piagam Jakarta</p>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-xs text-slate-400 group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+
+                        <button onclick="scrollToChapter('chap-kedudukan')" class="w-full text-left p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition flex items-center justify-between group">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-9 h-9 rounded-xl bg-amber-100 dark:bg-amber-950/80 text-amber-700 dark:text-amber-400 flex items-center justify-center font-black text-sm group-hover:scale-105 transition-transform">2</div>
+                                <div>
+                                    <h4 class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100">Menjiwai Pancasila</h4>
+                                    <p class="text-[11px] text-slate-500 dark:text-slate-400">Kedudukan & Sila 1 - 5</p>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-xs text-slate-400 group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+
+                        <button onclick="scrollToChapter('chap-demokrasi')" class="w-full text-left p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition flex items-center justify-between group">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-9 h-9 rounded-xl bg-blue-100 dark:bg-blue-950/80 text-blue-700 dark:text-blue-400 flex items-center justify-center font-black text-sm group-hover:scale-105 transition-transform">3</div>
+                                <div>
+                                    <h4 class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100">Demokrasi UUD 1945</h4>
+                                    <p class="text-[11px] text-slate-500 dark:text-slate-400">Dekrit 1959, Hak & Kewajiban</p>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-xs text-slate-400 group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </div>
+
+                    <!-- Important Timeline Cheat Sheet -->
+                    <div class="bg-gradient-to-br from-brand-red to-brand-darkred rounded-2xl p-5 text-white shadow-md space-y-3">
+                        <h4 class="font-bold text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2">
+                            <i class="fa-regular fa-calendar-check text-amber-300"></i> Tanggal Wajib Hafal ASTS
+                        </h4>
+                        <ul class="space-y-2 text-xs">
+                            <li class="flex justify-between items-center border-b border-white/15 pb-1.5">
+                                <span class="font-semibold text-amber-200">29 Mei - 1 Jun 1945</span>
+                                <span>Sidang BPUPK I</span>
+                            </li>
+                            <li class="flex justify-between items-center border-b border-white/15 pb-1.5">
+                                <span class="font-semibold text-amber-200">1 Juni 1945</span>
+                                <span>Lahir Istilah Pancasila</span>
+                            </li>
+                            <li class="flex justify-between items-center border-b border-white/15 pb-1.5">
+                                <span class="font-semibold text-amber-200">22 Juni 1945</span>
+                                <span>Piagam Jakarta</span>
+                            </li>
+                            <li class="flex justify-between items-center border-b border-white/15 pb-1.5">
+                                <span class="font-semibold text-amber-200">18 Agustus 1945</span>
+                                <span>Pengesahan PPKI</span>
+                            </li>
+                            <li class="flex justify-between items-center">
+                                <span class="font-semibold text-amber-200">5 Juli 1959</span>
+                                <span>Dekrit Presiden</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Detailed Content Display -->
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- Chapter 1 -->
+                    <div id="chap-sejarah" class="materi-card bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 transition">
+                        <div class="flex items-center space-x-3 border-b border-slate-100 dark:border-slate-800 pb-4">
+                            <span class="w-9 h-9 rounded-xl bg-red-100 dark:bg-red-950/80 text-brand-red dark:text-red-400 font-extrabold flex items-center justify-center text-sm">1</span>
+                            <div>
+                                <h3 class="font-bold text-slate-900 dark:text-white text-base sm:text-lg">Sejarah Perumusan & Pengesahan Pancasila</h3>
+                                <p class="text-xs text-slate-500 dark:text-slate-400">Proses historis perumusan ideologi negara oleh para Pendiri Bangsa</p>
+                            </div>
+                        </div>
+
+                        <div class="prose dark:prose-invert max-w-none text-xs sm:text-sm space-y-3 leading-relaxed text-slate-700 dark:text-slate-300">
+                            <p>
+                                Perumusan Pancasila sebagai dasar negara memerlukan dinamika pemikiran yang mendalam dari para tokoh pahlawan bangsa dalam sidang BPUPK dan PPKI.
+                            </p>
+                            
+                            <div class="bg-slate-50 dark:bg-slate-800/60 p-4 rounded-xl border border-slate-200 dark:border-slate-700 space-y-2">
+                                <h5 class="font-bold text-slate-900 dark:text-white text-xs uppercase tracking-wide">3 Tokoh Pengusul Dasar Negara (Sidang BPUPK I):</h5>
+                                <ul class="list-disc list-inside space-y-1.5 text-xs text-slate-600 dark:text-slate-300">
+                                    <li><strong class="text-slate-900 dark:text-white">Mohammad Yamin (29 Mei 1945)</strong>: Peri Kebangsaan, Peri Kemanusiaan, Peri Ketuhanan, Peri Kerakyatan, dan Kesejahteraan Rakyat.</li>
+                                    <li><strong class="text-slate-900 dark:text-white">Mr. Soepomo (31 Mei 1945)</strong>: Mengusulkan konsep <em class="text-amber-600 dark:text-amber-400 font-medium">Negara Integralistik</em> (Persatuan, Kekeluargaan, Keseimbangan Lahir Batin, Musyawarah, Keadilan Rakyat).</li>
+                                    <li><strong class="text-slate-900 dark:text-white">Ir. Soekarno (1 Juni 1945)</strong>: Memperkenalkan istilah <em class="text-brand-red dark:text-red-400 font-medium">Pancasila</em> (Kebangsaan, Internasionalisme/Kemanusiaan, Mufakat/Demokrasi, Kesejahteraan Sosial, Ketuhanan Berkebudayaan).</li>
+                                </ul>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs pt-1">
+                                <div class="bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900/60 p-3.5 rounded-xl">
+                                    <span class="font-bold text-amber-900 dark:text-amber-300 block mb-1">Panitia Sembilan (22 Juni 1945)</span>
+                                    Menghasilkan <strong class="text-slate-900 dark:text-white">Piagam Jakarta (Jakarta Charter)</strong>. Sila ke-1 awalnya berbunyi: <em>"Ketuhanan dengan kewajiban menjalankan syariat Islam bagi pemeluk-pemeluknya"</em>.
+                                </div>
+                                <div class="bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-900/60 p-3.5 rounded-xl">
+                                    <span class="font-bold text-emerald-900 dark:text-emerald-300 block mb-1">Pengesahan PPKI (18 Agustus 1945)</span>
+                                    Pancasila disahkan secara konstitusional. Sila ke-1 diubah menjadi <em>"Ketuhanan Yang Maha Esa"</em> demi menjaga persatuan bangsa Indonesia yang majemuk.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chapter 2 -->
+                    <div id="chap-kedudukan" class="materi-card bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 transition">
+                        <div class="flex items-center space-x-3 border-b border-slate-100 dark:border-slate-800 pb-4">
+                            <span class="w-9 h-9 rounded-xl bg-amber-100 dark:bg-amber-950/80 text-amber-700 dark:text-amber-400 font-extrabold flex items-center justify-center text-sm">2</span>
+                            <div>
+                                <h3 class="font-bold text-slate-900 dark:text-white text-base sm:text-lg">Kedudukan & Menjiwai Nilai Pancasila</h3>
+                                <p class="text-xs text-slate-500 dark:text-slate-400">Pancasila sebagai Volksgeist, Identitas Nasional, dan Sumber Hukum</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                            <p>
+                                Pancasila berkedudukan sebagai <strong class="text-slate-900 dark:text-white">Dasar Negara</strong> (Pembukaan UUD 1945 Alinea IV), <strong class="text-slate-900 dark:text-white">Pandangan Hidup Bangsa</strong>, serta <strong class="text-slate-900 dark:text-white">Identitas Nasional</strong> (ciri khas kepribadian yang membedakan Indonesia dari bangsa lain).
+                            </p>
+
+                            <!-- Interactive 5 Sila Card Grid -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                                <div class="p-3.5 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200 dark:border-slate-700">
+                                    <div class="font-bold text-xs text-brand-red dark:text-red-400 mb-1">Sila 1: Ketuhanan Yang Maha Esa</div>
+                                    <p class="text-xs text-slate-600 dark:text-slate-300">Sumber utama nilai kehidupan, menjiwai sila 2-5. Menurut Moh. Hatta, memberikan dasar moral bagi politik negara.</p>
+                                </div>
+                                <div class="p-3.5 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200 dark:border-slate-700">
+                                    <div class="font-bold text-xs text-brand-red dark:text-red-400 mb-1">Sila 2: Kemanusiaan Yang Adil dan Beradab</div>
+                                    <p class="text-xs text-slate-600 dark:text-slate-300">Pengakuan kesamaan derajat, hak, dan kewajiban tanpa membeda-bedakan suku, agama, atau status sosial.</p>
+                                </div>
+                                <div class="p-3.5 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200 dark:border-slate-700">
+                                    <div class="font-bold text-xs text-brand-red dark:text-red-400 mb-1">Sila 3: Persatuan Indonesia</div>
+                                    <p class="text-xs text-slate-600 dark:text-slate-300">Cinta tanah air, rela berkorban demi bangsa, serta mengutamakan kepentingan nasional di atas kepentingan pribadi.</p>
+                                </div>
+                                <div class="p-3.5 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200 dark:border-slate-700">
+                                    <div class="font-bold text-xs text-brand-red dark:text-red-400 mb-1">Sila 4: Kerakyatan yang Dipimpin...</div>
+                                    <p class="text-xs text-slate-600 dark:text-slate-300">Menekankan nilai musyawarah, kedaulatan rakyat, dan akuntabilitas publik pertanggungjawaban pejabat.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chapter 3 -->
+                    <div id="chap-demokrasi" class="materi-card bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 transition">
+                        <div class="flex items-center space-x-3 border-b border-slate-100 dark:border-slate-800 pb-4">
+                            <span class="w-9 h-9 rounded-xl bg-blue-100 dark:bg-blue-950/80 text-blue-700 dark:text-blue-400 font-extrabold flex items-center justify-center text-sm">3</span>
+                            <div>
+                                <h3 class="font-bold text-slate-900 dark:text-white text-base sm:text-lg">Demokrasi Berdasarkan UUD NRI 1945</h3>
+                                <p class="text-xs text-slate-500 dark:text-slate-400">Prinsip kedaulatan rakyat, Dekrit Presiden 1959, dan kewenangan lembaga negara</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                            <p>
+                                Demokrasi Pancasila mendasarkan diri pada <strong class="text-slate-900 dark:text-white">paham kekeluargaan dan kegotongroyongan</strong> yang ditujukan untuk mencapai kesejahteraan rakyat.
+                            </p>
+
+                            <div class="p-4 bg-red-50/70 dark:bg-red-950/30 border border-red-200 dark:border-red-900/50 rounded-xl space-y-2 text-xs">
+                                <h5 class="font-bold text-brand-darkred dark:text-red-400">Dekrit Presiden 5 Juli 1959</h5>
+                                <p>
+                                    <strong class="text-slate-900 dark:text-white">Latar Belakang:</strong> Kegagalan Badan Konstituante dalam menyusun UUD baru untuk menggantikan UUDS 1950.
+                                </p>
+                                <p><strong class="text-slate-900 dark:text-white">Isi Utama Dekrit:</strong></p>
+                                <ul class="list-disc list-inside space-y-1 text-slate-600 dark:text-slate-300 pl-1">
+                                    <li>Pembubaran Badan Konstituante.</li>
+                                    <li>Berlakunya kembali UUD 1945 dan tidak berlakunya UUDS 1950.</li>
+                                    <li>Pembentukan MPRS dan DPAS dalam waktu sesingkat-singkatnya.</li>
+                                </ul>
+                            </div>
+
+                            <div class="p-4 bg-blue-50/70 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/50 rounded-xl space-y-2 text-xs">
+                                <h5 class="font-bold text-blue-900 dark:text-blue-300">Pasal-Pasal Kunci UUD 1945:</h5>
+                                <ul class="space-y-1.5 text-slate-700 dark:text-slate-300">
+                                    <li><strong class="text-slate-900 dark:text-white">Pasal 3 & 37:</strong> Wewenang MPR untuk mengubah dan menetapkan UUD NRI Tahun 1945.</li>
+                                    <li><strong class="text-slate-900 dark:text-white">Pasal 31:</strong> Setiap warga negara berhak mendapatkan pendidikan (Hak asasi yang dijamin negara).</li>
+                                    <li><strong class="text-slate-900 dark:text-white">Hak & Kewajiban:</strong> Hak adalah kewenangan yang diperoleh, sedangkan Kewajiban adalah tugas yang wajib dilaksanakan penuh tanggung jawab.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= SECTION 2: FLASHCARDS ================= -->
+        <section id="sec-flashcards" class="tab-content hidden space-y-6">
+            <div class="max-w-2xl mx-auto text-center space-y-2">
+                <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white">Kartu Hafalan (Flashcards)</h2>
+                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Uji daya ingat kamu seputar tanggal penting, tokoh, dan konsep dasar PPKn Kelas XI.</p>
+            </div>
+
+            <!-- Flashcard Control Bar -->
+            <div class="max-w-xl mx-auto flex items-center justify-between bg-white dark:bg-slate-900 p-3 rounded-2xl border border-slate-200 dark:border-slate-800 text-xs">
+                <span id="fc-progress" class="font-bold text-slate-600 dark:text-slate-300">Kartu 1 dari 12</span>
+                <div class="flex space-x-2">
+                    <button onclick="shuffleFlashcards()" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-semibold transition flex items-center gap-1">
+                        <i class="fa-solid fa-shuffle text-xs"></i> Acak
+                    </button>
+                    <button onclick="resetFlashcardDeck()" class="px-3 py-1.5 rounded-lg bg-red-50 dark:bg-red-950/50 text-brand-red dark:text-red-400 font-semibold hover:bg-red-100 transition flex items-center gap-1">
+                        <i class="fa-solid fa-rotate-right text-xs"></i> Reset
+                    </button>
+                </div>
+            </div>
+
+            <!-- Interactive Flip Card Container -->
+            <div class="max-w-xl mx-auto perspective-1000">
+                <div id="flashcard" onclick="flipCard()" class="relative w-full h-80 rounded-3xl shadow-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 cursor-pointer transform-style-3d transition-transform duration-500 flex items-center justify-center p-8 text-center select-none">
+                    <!-- Front Face -->
+                    <div id="fc-front" class="absolute inset-0 backface-hidden flex flex-col items-center justify-center p-8 rounded-3xl bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-800">
+                        <span id="fc-category" class="px-3.5 py-1 rounded-full bg-red-100 dark:bg-red-950/80 text-brand-red dark:text-red-400 font-bold text-xs uppercase tracking-wider mb-4 border border-red-200 dark:border-red-900">Sejarah</span>
+                        <h3 id="fc-question" class="text-lg sm:text-xl font-bold text-slate-800 dark:text-slate-100 leading-snug">
+                            Loading flashcard...
+                        </h3>
+                        <p class="mt-6 text-xs text-slate-400 flex items-center gap-1.5">
+                            <i class="fa-solid fa-hand-pointer text-xs"></i> Klik kartu untuk balikkan
+                        </p>
+                    </div>
+
+                    <!-- Back Face -->
+                    <div id="fc-back" class="absolute inset-0 backface-hidden rotate-y-180 flex flex-col items-center justify-center p-8 rounded-3xl bg-slate-900 dark:bg-slate-950 text-white border border-slate-800">
+                        <span class="text-xs font-bold text-amber-400 uppercase tracking-widest mb-3">Kunci Jawaban</span>
+                        <p id="fc-answer" class="text-base sm:text-lg font-medium leading-relaxed">
+                            Answer display...
+                        </p>
+                        <span class="mt-6 text-xs text-slate-400 flex items-center gap-1.5">
+                            <i class="fa-solid fa-rotate-left text-xs"></i> Klik lagi untuk balikkan
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flashcard Navigation Controls -->
+            <div class="max-w-xl mx-auto flex items-center justify-between pt-2">
+                <button onclick="prevCard()" class="px-5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 font-bold text-xs text-slate-700 dark:text-slate-200 shadow-sm transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Sebelum
+                </button>
+                <div class="flex space-x-2">
+                    <button onclick="nextCard()" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-sm transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-check"></i> Paham
+                    </button>
+                </div>
+                <button onclick="nextCard()" class="px-5 py-2.5 rounded-xl bg-brand-red hover:bg-red-700 text-white font-bold text-xs shadow-sm transition flex items-center gap-2">
+                    Lanjut <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </section>
+
+
+        <!-- ================= SECTION 3: SIMULASI UJIAN (25 SOAL) ================= -->
+        <section id="sec-simulasi" class="tab-content hidden space-y-6">
+            <!-- Quiz Header Banner -->
+            <div class="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-xl bg-red-100 dark:bg-red-950/80 text-brand-red dark:text-red-400 flex items-center justify-center font-black text-xl">
+                        25
+                    </div>
+                    <div>
+                        <h2 class="font-extrabold text-slate-900 dark:text-white text-base sm:text-lg">Simulasi Ujian ASTS PPKn Kelas XI</h2>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">25 Soal Pilihan Ganda Kurikulum Merdeka</p>
+                    </div>
+                </div>
+
+                <!-- Timer & Status Counters -->
+                <div class="flex items-center space-x-4">
+                    <div class="bg-slate-100 dark:bg-slate-800 px-3.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 text-center">
+                        <span class="text-[10px] text-slate-400 block font-semibold uppercase">Waktu Sisa</span>
+                        <span id="quiz-timer" class="font-mono font-bold text-sm text-amber-600 dark:text-amber-400">30:00</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-[10px] text-slate-400 block font-semibold uppercase">Terjawab</span>
+                        <span id="quiz-answered-count" class="font-extrabold text-brand-red dark:text-red-400 text-sm">0 / 25</span>
+                    </div>
+                    <button onclick="confirmSubmitQuiz()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 rounded-xl font-bold text-xs shadow-md transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-paper-plane"></i> Kirim Ujian
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quiz Main Workspace -->
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                <!-- Question View Box (Cols 3) -->
+                <div class="lg:col-span-3 space-y-6">
+                    <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-sm space-y-6 min-h-[400px] flex flex-col justify-between">
+                        <!-- Top Info Bar -->
+                        <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+                            <span id="q-number-badge" class="px-3.5 py-1 rounded-full bg-red-50 dark:bg-red-950/60 text-brand-red dark:text-red-400 font-bold text-xs border border-red-100 dark:border-red-900">
+                                Soal No. 1 dari 25
+                            </span>
+                            <span id="q-category-tag" class="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                                Kategori: Sejarah
+                            </span>
+                        </div>
+
+                        <!-- Question Text -->
+                        <div class="space-y-4">
+                            <h3 id="q-text" class="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 leading-relaxed">
+                                Loading question text...
+                            </h3>
+                            
+                            <!-- Options Grid -->
+                            <div id="q-options" class="space-y-3 pt-2">
+                                <!-- Options rendered via JS -->
+                            </div>
+                        </div>
+
+                        <!-- Bottom Nav Buttons -->
+                        <div class="flex justify-between items-center border-t border-slate-100 dark:border-slate-800 pt-5">
+                            <button id="btn-prev-q" onclick="navigateQuiz(-1)" class="px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition disabled:opacity-40">
+                                <i class="fa-solid fa-chevron-left mr-1"></i> Sebelum
+                            </button>
+                            <button id="btn-next-q" onclick="navigateQuiz(1)" class="px-5 py-2.5 rounded-xl bg-slate-900 dark:bg-slate-100 hover:bg-slate-800 dark:hover:bg-white text-white dark:text-slate-900 text-xs font-bold transition">
+                               Berikutnya <i class="fa-solid fa-chevron-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question Grid Navigation Box (Col 1) -->
+                <div class="lg:col-span-1 space-y-4">
+                    <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-5 shadow-sm space-y-4">
+                        <h4 class="font-bold text-slate-900 dark:text-slate-100 text-xs uppercase tracking-wider border-b border-slate-100 dark:border-slate-800 pb-2">
+                            Navigasi Nomor Soal
+                        </h4>
+
+                        <!-- 25 Grid Buttons -->
+                        <div id="q-grid" class="grid grid-cols-5 gap-2">
+                            <!-- Populated via JS -->
+                        </div>
+
+                        <!-- Legend -->
+                        <div class="pt-3 border-t border-slate-100 dark:border-slate-800 text-[11px] space-y-2 text-slate-500 dark:text-slate-400">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-brand-red inline-block"></span>
+                                <span>Sudah Dijawab</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 inline-block"></span>
+                                <span>Belum Dijawab</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-amber-400 inline-block"></span>
+                                <span>Sedang Dilihat</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= SECTION 4: ANALISIS PERFORMA ================= -->
+        <section id="sec-performa" class="tab-content hidden space-y-6">
+            <!-- Empty state if not submitted -->
+            <div id="performa-placeholder" class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-12 text-center space-y-4 max-w-xl mx-auto shadow-sm">
+                <div class="w-16 h-16 rounded-2xl bg-amber-100 dark:bg-amber-950/80 text-amber-600 dark:text-amber-400 flex items-center justify-center text-2xl mx-auto">
+                    <i class="fa-solid fa-clipboard-check"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 dark:text-white">Belum Ada Hasil Ujian</h3>
+                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                    Kerjakan simulasi ujian 25 soal terlebih dahulu untuk melihat skor total, pemahaman per bab, serta pembahasannya.
+                </p>
+                <button onclick="switchTab('simulasi')" class="bg-brand-red hover:bg-red-700 text-white px-5 py-2.5 rounded-xl font-bold text-xs shadow-md transition inline-flex items-center gap-2">
+                    <i class="fa-solid fa-pen-to-square"></i> Mulai Ujian Sekarang
+                </button>
+            </div>
+
+            <!-- Active Score Card (Hidden by default) -->
+            <div id="performa-results" class="hidden space-y-6">
+                <!-- Score Header Banner -->
+                <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-xl grid grid-cols-1 md:grid-cols-3 gap-6 items-center border border-slate-800">
+                    <div class="md:col-span-2 space-y-2">
+                        <span id="score-status-badge" class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-bold text-xs border border-emerald-500/30 uppercase tracking-wider">
+                            Hasil Simulasi
+                        </span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                            Evaluasi Performa Ujian
+                        </h2>
+                        <p id="score-feedback-text" class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                            Berikut adalah ringkasan hasil kerja kamu.
+                        </p>
+                        <div class="pt-2 flex gap-3">
+                            <button onclick="window.print()" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-bold transition flex items-center gap-1.5 no-print">
+                                <i class="fa-solid fa-print"></i> Cetak Laporan
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Large Circular Score Display -->
+                    <div class="bg-white/10 rounded-2xl p-5 border border-white/10 text-center flex flex-col items-center justify-center backdrop-blur-sm">
+                        <span class="text-xs uppercase tracking-widest text-slate-300 font-semibold mb-1">Skor Akhir</span>
+                        <div id="final-score-val" class="text-5xl font-black text-amber-400 tracking-tight">
+                            0
+                        </div>
+                        <span id="final-score-ratio" class="text-xs text-slate-300 mt-1">0 dari 25 Benar</span>
+                    </div>
+                </div>
+
+                <!-- Category Breakdown Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
+                        <div class="text-xs text-slate-500 dark:text-slate-400 font-semibold">Sejarah Perumusan</div>
+                        <div id="cat-score-sejarah" class="text-xl font-extrabold text-slate-900 dark:text-white">0%</div>
+                        <div class="w-full bg-slate-100 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+                            <div id="cat-bar-sejarah" class="bg-brand-red h-full w-0 transition-all duration-700"></div>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
+                        <div class="text-xs text-slate-500 dark:text-slate-400 font-semibold">Menjiwai Nilai Pancasila</div>
+                        <div id="cat-score-pancasila" class="text-xl font-extrabold text-slate-900 dark:text-white">0%</div>
+                        <div class="w-full bg-slate-100 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+                            <div id="cat-bar-pancasila" class="bg-amber-500 h-full w-0 transition-all duration-700"></div>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
+                        <div class="text-xs text-slate-500 dark:text-slate-400 font-semibold">Demokrasi & UUD 1945</div>
+                        <div id="cat-score-uud" class="text-xl font-extrabold text-slate-900 dark:text-white">0%</div>
+                        <div class="w-full bg-slate-100 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+                            <div id="cat-bar-uud" class="bg-blue-600 h-full w-0 transition-all duration-700"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Answer Review List -->
+                <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm space-y-4">
+                    <h3 class="font-bold text-slate-900 dark:text-white text-base border-b border-slate-100 dark:border-slate-800 pb-3 flex items-center justify-between">
+                        <span>Pembahasan Lengkap 25 Soal</span>
+                        <button onclick="resetQuiz()" class="text-xs text-brand-red dark:text-red-400 font-bold hover:underline no-print">
+                            <i class="fa-solid fa-rotate-right"></i> Ulangi Ujian
+                        </button>
+                    </h3>
+
+                    <div id="review-questions-list" class="space-y-4 custom-scrollbar max-h-[600px] overflow-y-auto pr-2">
+                        <!-- Detailed review rendered via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal Confirmation Dialog -->
+    <div id="modal-confirm" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-sm w-full p-6 space-y-4 text-center shadow-2xl border border-slate-200 dark:border-slate-800">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-100 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl mx-auto">
+                <i class="fa-solid fa-circle-question"></i>
+            </div>
+            <h4 class="font-bold text-slate-900 dark:text-white text-lg">Kirim Jawaban Ujian?</h4>
+            <p id="modal-confirm-text" class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                Kamu telah menjawab <span id="modal-count" class="font-bold text-slate-800 dark:text-slate-200">0</span> dari 25 soal. Yakin ingin menyelesaikan ujian?
+            </p>
+            <div class="flex space-x-3 pt-2">
+                <button onclick="closeModal()" class="flex-1 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-800">
+                    Batal
+                </button>
+                <button onclick="executeQuizSubmit()" class="flex-1 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-md">
+                    Ya, Selesaikan
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Web Audio API Synthesizer (No external audio files needed)
+        let audioEnabled = true;
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playSound(type) {
+            if (!audioEnabled || !audioCtx) return;
+            try {
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                const now = audioCtx.currentTime;
+                if (type === 'click') {
+                    osc.frequency.setValueAtTime(400, now);
+                    gain.gain.setValueAtTime(0.05, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+                    osc.start(now);
+                    osc.stop(now + 0.08);
+                } else if (type === 'flip') {
+                    osc.frequency.setValueAtTime(300, now);
+                    osc.frequency.exponentialRampToValueAtTime(600, now + 0.12);
+                    gain.gain.setValueAtTime(0.08, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+                    osc.start(now);
+                    osc.stop(now + 0.12);
+                } else if (type === 'success') {
+                    osc.frequency.setValueAtTime(523.25, now); // C5
+                    osc.frequency.setValueAtTime(659.25, now + 0.1); // E5
+                    gain.gain.setValueAtTime(0.1, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+                    osc.start(now);
+                    osc.stop(now + 0.3);
+                }
+            } catch(e) {
+                console.log("Audio play error", e);
+            }
+        }
+
+        function toggleAudio() {
+            audioEnabled = !audioEnabled;
+            const btn = document.getElementById('audio-toggle-btn');
+            if (audioEnabled) {
+                btn.innerHTML = `<i class="fa-solid fa-volume-high text-sm"></i>`;
+                playSound('click');
+            } else {
+                btn.innerHTML = `<i class="fa-solid fa-volume-xmark text-sm text-slate-400"></i>`;
+            }
+        }
+
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            playSound('click');
+        }
+
+        // Quiz Questions Data (25 Items)
+        const quizData = [
+            {
+                id: 1,
+                category: "Sejarah",
+                question: "Tokoh yang menyampaikan usulan lima dasar negara dalam pidatonya pada tanggal 1 Juni 1945 serta pertama kali mengemukakan istilah 'Pancasila' adalah...",
+                options: ["Mohammad Yamin", "Ir. Soekarno", "Mr. Soepomo", "Drs. Mohammad Hatta"],
+                answer: 1,
+                explanation: "Ir. Soekarno menyampaikan pidato pada 1 Juni 1945 di sidang BPUPK yang menjadi cikal bakal istilah Pancasila sebagai dasar negara."
+            },
+            {
+                id: 2,
+                category: "Sejarah",
+                question: "Gagasan dasar negara yang mengedepankan konsep 'Negara Integralistik' (persatuan kekeluargaan) disampaikan dalam sidang pertama BPUPK oleh...",
+                options: ["Mr. Soepomo", "Mohammad Yamin", "Ir. Soekarno", "K.H. Wachid Hasjim"],
+                answer: 0,
+                explanation: "Mr. Soepomo mengusulkan paham negara integralistik pada 31 Mei 1945 yang memandang negara sebagai satu kesatuan utuh dengan rakyat."
+            },
+            {
+                id: 3,
+                category: "Sejarah",
+                question: "Dokumen sejarah mengenai rancangan dasar negara Republik Indonesia yang berhasil disusun oleh Panitia Sembilan pada 22 Juni 1945 disebut...",
+                options: ["Proklamasi Kemerdekaan", "Piagam Jakarta (Jakarta Charter)", "Teks Dekrit Presiden", "Ketetapan MPRS"],
+                answer: 1,
+                explanation: "Panitia Sembilan berhasil menyusun Piagam Jakarta pada 22 Juni 1945 sebagai naskah kompromi dasar negara."
+            },
+            {
+                id: 4,
+                category: "Sejarah",
+                question: "Pancasila disahkan secara konstitusional sebagai dasar negara Republik Indonesia oleh PPKI pada tanggal...",
+                options: ["1 Juni 1945", "22 Juni 1945", "17 Agustus 1945", "18 Agustus 1945"],
+                answer: 3,
+                explanation: "Pada 18 Agustus 1945, PPKI secara resmi mengesahkan UUD 1945 beserta Pancasila di Pembukaan UUD 1945."
+            },
+            {
+                id: 5,
+                category: "Demokrasi",
+                question: "Alasan utama dan latar belakang dikeluarkannya Dekrit Presiden pada tanggal 5 Juli 1959 oleh Presiden Soekarno adalah...",
+                options: [
+                    "Kegagalan Badan Konstituante dalam menyusun UUD baru menggantikan UUDS 1950",
+                    "Adanya agresi militer dari pihak asing di Jakarta",
+                    "Keinginan mengubah sistem pemerintahan menjadi monarki",
+                    "Pembentukan DPR baru hasil pemilihan umum"
+                ],
+                answer: 0,
+                explanation: "Dekrit Presiden 5 Juli 1959 dikeluarkan karena Badan Konstituante mengalami jalan buntu dan gagal menyusun UUD baru."
+            },
+            {
+                id: 6,
+                category: "Demokrasi",
+                question: "Berikut ini yang BUKAN merupakan isi dari Dekrit Presiden 5 Juli 1959 adalah...",
+                options: [
+                    "Pembubaran Badan Konstituante",
+                    "Berlakunya kembali UUD 1945 dan tidak berlakunya UUDS 1950",
+                    "Pembentukan MPRS dan DPAS dalam waktu sesingkat-singkatnya",
+                    "Pengangkatan Presiden seumur hidup"
+                ],
+                answer: 3,
+                explanation: "Pengangkatan Presiden seumur hidup bukan merupakan isi Dekrit Presiden 5 Juli 1959."
+            },
+            {
+                id: 7,
+                category: "Pancasila",
+                question: "Kedudukan Pancasila sebagai dasar negara Republik Indonesia secara hukum/konstitusional tercantum dalam...",
+                options: [
+                    "Batang Tubuh UUD 1945 Pasal 1",
+                    "Pembukaan UUD NRI Tahun 1945 Alinea Ke-IV",
+                    "Penjelasan UUD 1945",
+                    "Aturan Peralihan UUD 1945"
+                ],
+                answer: 1,
+                explanation: "Rumusan sila-sila Pancasila sebagai dasar negara tercantum pada alinea ke-4 Pembukaan UUD 1945."
+            },
+            {
+                id: 8,
+                category: "Pancasila",
+                question: "Menurut Mohammad Hatta, politik negara Indonesia mendapat dasar moral yang kuat ketika dilandasi oleh prinsip...",
+                options: ["Keadilan Sosial", "Persatuan Bangsa", "Ketuhanan Yang Maha Esa", "Musyawarah Mufakat"],
+                answer: 2,
+                explanation: "Bung Hatta menegaskan bahwa Sila Ketuhanan Yang Maha Esa menjadi dasar moral tertinggi bagi penyelenggaraan politik negara."
+            },
+            {
+                id: 9,
+                category: "Pancasila",
+                question: "Pancasila berfungsi sebagai Identitas Nasional dan 'Volksgeist' bangsa Indonesia. Yang dimaksud dengan Identitas Nasional adalah...",
+                options: [
+                    "Sistem hukum barat yang diterapkan di Indonesia",
+                    "Kepribadian, ciri khas, dan nilai budaya yang membedakan bangsa Indonesia dari bangsa lain",
+                    "Bahasa asing yang diserap ke dalam bahasa Indonesia",
+                    "Peraturan perundang-undangan sementara"
+                ],
+                answer: 1,
+                explanation: "Identitas Nasional adalah ciri khas dan pandangan hidup bangsa yang lahir dari akar sejarah dan budaya sendiri."
+            },
+            {
+                id: 10,
+                category: "Pancasila",
+                question: "Sila Pancasila yang dijadikan sumber utama nilai-nilai kehidupan yang menjiwai, mendasari, dan membimbing sila-sila lainnya adalah...",
+                options: ["Sila Pertama", "Sila Kedua", "Sila Ketiga", "Sila Keempat"],
+                answer: 0,
+                explanation: "Sila Pertama (Ketuhanan Yang Maha Esa) menjadi fondasi moral yang menjiwai Sila 2, 3, 4, dan 5."
+            },
+            {
+                id: 11,
+                category: "Pancasila",
+                question: "Adanya kesamaan derajat dalam hak dan kewajiban tanpa membeda-bedakan suku, agama, atau status sosial merupakan perwujudan sila...",
+                options: ["Sila Pertama", "Sila Kedua", "Sila Ketiga", "Sila Keempat"],
+                answer: 1,
+                explanation: "Pengakuan kesamaan derajat manusia adalah inti perwujudan Sila Ke-2 (Kemanusiaan yang Adil dan Beradab)."
+            },
+            {
+                id: 12,
+                category: "Pancasila",
+                question: "Sikap rela berkorban demi kepentingan bangsa dan negara serta memupuk rasa cinta tanah air merupakan perwujudan sila...",
+                options: ["Sila Pertama", "Sila Kedua", "Sila Ketiga", "Sila Kelima"],
+                answer: 2,
+                explanation: "Cinta tanah air dan rela berkorban untuk NKRI merupakan perwujudan Sila Ke-3 (Persatuan Indonesia)."
+            },
+            {
+                id: 13,
+                category: "Pancasila",
+                question: "Sila keempat Pancasila menekankan nilai-nilai utama dalam kehidupan berbangsa, yaitu...",
+                options: [
+                    "Kebebasan individu mutlak tanpa batas",
+                    "Musyawarah mufakat, kedaulatan rakyat, dan akuntabilitas publik",
+                    "Dominasi golongan mayoritas atas minoritas",
+                    "Kekuasaan tunggal pada pimpinan eksekutif"
+                ],
+                answer: 1,
+                explanation: "Sila ke-4 mengutamakan musyawarah untuk mufakat serta kedaulatan rakyat yang bertanggung jawab."
+            },
+            {
+                id: 14,
+                category: "Demokrasi",
+                question: "Demokrasi Pancasila berbeda dengan demokrasi liberal karena Demokrasi Pancasila mendasarkan diri pada paham...",
+                options: ["Individualisme mutlak", "Kekeluargaan dan kegotongroyongan", "Kapitalisme pasar", "Sekularisme radikal"],
+                answer: 1,
+                explanation: "Demokrasi Pancasila berakar dari asas kekeluargaan dan gotong royong untuk kesejahteraan seluruh rakyat."
+            },
+            {
+                id: 15,
+                category: "Demokrasi",
+                question: "Hak setiap warga negara Indonesia untuk mendapatkan pendidikan diatur secara tegas dalam UUD NRI Tahun 1945 pasal...",
+                options: ["Pasal 27", "Pasal 29", "Pasal 30", "Pasal 31"],
+                answer: 3,
+                explanation: "Pasal 31 UUD 1945 menjamin hak setiap warga negara untuk memperoleh pendidikan."
+            },
+            {
+                id: 16,
+                category: "Demokrasi",
+                question: "Kegiatan MPR untuk mengubah dan menetapkan UUD NRI Tahun 1945 sesuai kewenangannya secara khusus diatur dalam pasal...",
+                options: ["Pasal 1 dan Pasal 2", "Pasal 3 dan Pasal 37", "Pasal 27 dan Pasal 28", "Pasal 33 dan Pasal 34"],
+                answer: 1,
+                explanation: "Kewenangan MPR dalam mengubah UUD diatur dalam Pasal 3 dan tata caranya diatur dalam Pasal 37."
+            },
+            {
+                id: 17,
+                category: "Demokrasi",
+                question: "Pengertian dari 'Kewajiban Warga Negara' yang paling tepat adalah...",
+                options: [
+                    "Sesuatu yang berhak diterima dari pemerintah",
+                    "Sesuatu yang harus dilaksanakan dengan penuh tanggung jawab sesuai hukum",
+                    "Fasilitas yang disediakan oleh negara",
+                    "Kebebasan tanpa batas untuk melakukan tindakan apapun"
+                ],
+                answer: 1,
+                explanation: "Kewajiban adalah tindakan atau perbuatan yang harus dilakukan secara bertanggung jawab berdasarkan aturan."
+            },
+            {
+                id: 18,
+                category: "Pancasila",
+                question: "Pernyataan bahwa Pancasila merupakan titik yang mempertemukan dan memfasilitasi keragaman bangsa Indonesia menunjukkan fungsi Pancasila sebagai...",
+                options: ["Alat pemisah kelompok", "Titik perjumpaan (Meeting Point) pemersatu bangsa", "Dokumen kuno", "Aturan daerah"],
+                answer: 1,
+                explanation: "Pancasila berperan sebagai 'titik temu' yang mampu mempersatukan berbagai kemajemukan suku, agama, dan budaya."
+            },
+            {
+                id: 19,
+                category: "Sejarah",
+                question: "Perubahan sila pertama Piagam Jakarta menjadi 'Ketuhanan Yang Maha Esa' pada 18 Agustus 1945 dilakukan demi alasan...",
+                options: [
+                    "Tekanan dari pihak sekutu",
+                    "Menjaga persatuan dan keutuhan bangsa Indonesia dari ancaman disintegrasi",
+                    "Perintah dari pemerintah Jepang",
+                    "Ketidaktersediaan naskah asli"
+                ],
+                answer: 1,
+                explanation: "Perubahan tersebut mencerminkan kejiwaan para pendiri bangsa demi menjaga persatuan NKRI."
+            },
+            {
+                id: 20,
+                category: "Sejarah",
+                question: "Tokoh yang memberikan usulan dasar negara pada hari pertama sidang BPUPK (29 Mei 1945) adalah...",
+                options: ["Mohammad Yamin", "Mr. Soepomo", "Ir. Soekarno", "Drs. Mohammad Hatta"],
+                answer: 0,
+                explanation: "Mohammad Yamin menyampaikan pandangannya pada hari pertama sidang BPUPK tanggal 29 Mei 1945."
+            },
+            {
+                id: 21,
+                category: "Demokrasi",
+                question: "Semua pemegang jabatan publik harus dapat mempertanggungjawabkan ucapan, perilaku, dan kebijakannya kepada rakyat. Hal ini dinamakan...",
+                options: ["Otoriterisme", "Akuntabilitas publik", "Sentralisasi", "Nepotisme"],
+                answer: 1,
+                explanation: "Akuntabilitas publik adalah kewajiban pejabat untuk mempertanggungjawabkan kinerjanya kepada rakyat."
+            },
+            {
+                id: 22,
+                category: "Pancasila",
+                question: "Keputusan dan tindakan yang selalu dilandasi oleh nilai-nilai budaya dan moral sosial merupakan definisi dari...",
+                options: ["Kesadaran moral dan etika berbangsa", "Sikap pragmatis", "Perilaku individualis", "Kebijakan sepihak"],
+                answer: 0,
+                explanation: "Tindakan yang didasari nilai moral sosial mencerminkan kesadaran etika dan moral berbangsa."
+            },
+            {
+                id: 23,
+                category: "Sejarah",
+                question: "Badan Penyelidik Usaha-usaha Persiapan Kemerdekaan (BPUPK) dibentuk dengan tugas utama...",
+                options: [
+                    "Melantik Presiden dan Wakil Presiden",
+                    "Mempelajari dan menyelidiki hal-hal penting terkait pembentukan negara Indonesia merdeka",
+                    "Membuat perbatasan wilayah dengan negara tetangga",
+                    "Menyelenggarakan pemilihan umum pertama"
+                ],
+                answer: 1,
+                explanation: "BPUPK bertugas mempersiapkan dan merancang hal fundamental seperti dasar negara dan UUD."
+            },
+            {
+                id: 24,
+                category: "Sejarah",
+                question: "Lembaga yang dibentuk pada sidang PPKI 18 Agustus 1945 untuk membantu tugas Presiden sebelum terbentuknya DPR/MPR adalah...",
+                options: ["DPAS", "KNIP (Komite Nasional Indonesia Pusat)", "MPRS", "DPA"],
+                answer: 1,
+                explanation: "PPKI membentuk KNIP untuk membantu tugas-tugas Presiden sebelum lembaga legislatif resmi terbentuk."
+            },
+            {
+                id: 25,
+                category: "Pancasila",
+                question: "Sikap tidak membeda-bedakan warga negara berdasarkan latar belakang agama dan suku dalam pemberian fasilitas pelayanan publik merupakan pengamalan sila...",
+                options: ["Sila Pertama", "Sila Kedua", "Sila Ketiga", "Sila Keempat"],
+                answer: 1,
+                explanation: "Perlakuan adil tanpa diskriminasi sesuai dengan amanat Sila ke-2 (Kemanusiaan yang Adil dan Beradab)."
+            }
+        ];
+
+        const flashcardsData = [
+            { category: "Sejarah", q: "Kapan tanggal dilaksanakannya Sidang BPUPK Pertama?", a: "29 Mei – 1 Juni 1945" },
+            { category: "Sejarah", q: "Siapa pencetus istilah 'Pancasila' pada 1 Juni 1945?", a: "Ir. Soekarno" },
+            { category: "Sejarah", q: "Kapan Piagam Jakarta (Jakarta Charter) dirumuskan?", a: "22 Juni 1945 oleh Panitia Sembilan" },
+            { category: "Sejarah", q: "Kapan Pancasila disahkan secara konstitusional?", a: "18 Agustus 1945 oleh PPKI" },
+            { category: "Demokrasi", q: "Kapan Dekrit Presiden dikeluarkannya?", a: "5 Juli 1959 oleh Presiden Soekarno" },
+            { category: "Demokrasi", q: "Pasal berapa dalam UUD 1945 yang mengatur Hak Pendidikan?", a: "Pasal 31 UUD NRI Tahun 1945" },
+            { category: "Demokrasi", q: "Pasal berapa yang mengatur wewenang MPR mengamandemen UUD?", a: "Pasal 3 dan Pasal 37 UUD 1945" },
+            { category: "Pancasila", q: "Siapa tokoh pengusul paham 'Negara Integralistik'?", a: "Mr. Soepomo (31 Mei 1945)" },
+            { category: "Pancasila", q: "Apa maksud Pancasila sebagai Identitas Nasional?", a: "Kepribadian & ciri khas unik yang membedakan Indonesia dari bangsa lain" },
+            { category: "Pancasila", q: "Sila manakah yang mendasari dan menjiwai seluruh sila lain?", a: "Sila ke-1 (Ketuhanan Yang Maha Esa)" },
+            { category: "Pancasila", q: "Apa dasar moral politik negara menurut Moh. Hatta?", a: "Prinsip Ketuhanan Yang Maha Esa" },
+            { category: "Demokrasi", q: "Apa landasan utama Demokrasi Pancasila?", a: "Paham Kekeluargaan dan Kegotongroyongan" }
+        ];
+
+        let userAnswers = new Array(25).fill(null);
+        let currentQuizIndex = 0;
+        let currentFCIndex = 0;
+        let activeFCList = [...flashcardsData];
+        let isFlipped = false;
+        let timerInterval = null;
+        let timeLeftSeconds = 1800; // 30 mins
+
+        // Initialize App on DOM Ready
+        document.addEventListener('DOMContentLoaded', () => {
+            renderFlashcard();
+            renderQuizQuestion();
+            renderQuizGrid();
+        });
+
+        function switchTab(tabId) {
+            playSound('click');
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`sec-${tabId}`).classList.remove('hidden');
+
+            // Update desktop nav
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-brand-red', 'bg-red-50', 'dark:bg-red-950/40', 'border-red-100', 'dark:border-red-900/50');
+                btn.classList.add('text-slate-600', 'dark:text-slate-300');
+            });
+            const activeDesktop = document.getElementById(`nav-${tabId}`);
+            if(activeDesktop) {
+                activeDesktop.classList.add('text-brand-red', 'bg-red-50', 'dark:bg-red-950/40', 'border-red-100', 'dark:border-red-900/50');
+                activeDesktop.classList.remove('text-slate-600', 'dark:text-slate-300');
+            }
+
+            // Update mobile nav
+            document.querySelectorAll('.mob-btn').forEach(btn => {
+                btn.classList.remove('text-brand-red', 'font-bold');
+                btn.classList.add('text-slate-600', 'dark:text-slate-400');
+            });
+            const activeMobile = document.getElementById(`mob-${tabId}`);
+            if(activeMobile) {
+                activeMobile.classList.add('text-brand-red', 'font-bold');
+                activeMobile.classList.remove('text-slate-600', 'dark:text-slate-400');
+            }
+
+            if (tabId === 'simulasi' && !timerInterval) {
+                startQuizTimer();
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function filterMateri() {
+            const term = document.getElementById('materi-search').value.toLowerCase();
+            const cards = document.querySelectorAll('.materi-card');
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                if (text.includes(term)) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        function scrollToChapter(chapId) {
+            playSound('click');
+            const el = document.getElementById(chapId);
+            if(el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function renderFlashcard() {
+            if(activeFCList.length === 0) return;
+            const fc = activeFCList[currentFCIndex];
+            document.getElementById('fc-category').innerText = fc.category;
+            document.getElementById('fc-question').innerText = fc.q;
+            document.getElementById('fc-answer').innerText = fc.a;
+            document.getElementById('fc-progress').innerText = `Kartu ${currentFCIndex + 1} dari ${activeFCList.length}`;
+
+            isFlipped = false;
+            document.getElementById('flashcard').classList.remove('rotate-y-180');
+        }
+
+        function flipCard() {
+            playSound('flip');
+            isFlipped = !isFlipped;
+            const card = document.getElementById('flashcard');
+            if(isFlipped) {
+                card.classList.add('rotate-y-180');
+            } else {
+                card.classList.remove('rotate-y-180');
+            }
+        }
+
+        function nextCard() {
+            playSound('click');
+            currentFCIndex = (currentFCIndex + 1) % activeFCList.length;
+            renderFlashcard();
+        }
+
+        function prevCard() {
+            playSound('click');
+            currentFCIndex = (currentFCIndex - 1 + activeFCList.length) % activeFCList.length;
+            renderFlashcard();
+        }
+
+        function shuffleFlashcards() {
+            playSound('click');
+            activeFCList.sort(() => Math.random() - 0.5);
+            currentFCIndex = 0;
+            renderFlashcard();
+        }
+
+        function resetFlashcardDeck() {
+            playSound('click');
+            activeFCList = [...flashcardsData];
+            currentFCIndex = 0;
+            renderFlashcard();
+        }
+
+        function startQuizTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                if (timeLeftSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    executeQuizSubmit();
+                } else {
+                    timeLeftSeconds--;
+                    const m = Math.floor(timeLeftSeconds / 60);
+                    const s = timeLeftSeconds % 60;
+                    document.getElementById('quiz-timer').innerText = 
+                        `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+                }
+            }, 1000);
+        }
+
+        function renderQuizQuestion() {
+            const q = quizData[currentQuizIndex];
+            document.getElementById('q-number-badge').innerText = `Soal No. ${currentQuizIndex + 1} dari 25`;
+            document.getElementById('q-category-tag').innerText = `Kategori: ${q.category}`;
+            document.getElementById('q-text').innerText = q.question;
+
+            const optsContainer = document.getElementById('q-options');
+            optsContainer.innerHTML = '';
+
+            const optionLabels = ["A", "B", "C", "D"];
+            q.options.forEach((optText, optIdx) => {
+                const isSelected = userAnswers[currentQuizIndex] === optIdx;
+                const btn = document.createElement('button');
+                btn.className = `w-full text-left p-4 rounded-2xl border text-xs sm:text-sm font-medium transition flex items-center space-x-3 ${
+                    isSelected 
+                        ? 'border-brand-red bg-red-50 dark:bg-red-950/50 text-brand-darkred dark:text-red-300 font-bold shadow-sm' 
+                        : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200'
+                }`;
+                btn.onclick = () => selectOption(optIdx);
+
+                btn.innerHTML = `
+                    <span class="w-7 h-7 rounded-xl border ${isSelected ? 'bg-brand-red text-white border-brand-red' : 'border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'} flex items-center justify-center font-black text-xs shrink-0">
+                        ${optionLabels[optIdx]}
+                    </span>
+                    <span class="leading-relaxed">${optText}</span>
+                `;
+                optsContainer.appendChild(btn);
+            });
+
+            document.getElementById('btn-prev-q').disabled = currentQuizIndex === 0;
+            const nextBtn = document.getElementById('btn-next-q');
+            if(currentQuizIndex === 24) {
+                nextBtn.innerText = "Selesai / Kirim";
+            } else {
+                nextBtn.innerHTML = `Berikutnya <i class="fa-solid fa-chevron-right ml-1"></i>`;
+            }
+
+            updateAnsweredCount();
+            renderQuizGrid();
+        }
+
+        function selectOption(optIdx) {
+            playSound('click');
+            userAnswers[currentQuizIndex] = optIdx;
+            renderQuizQuestion();
+        }
+
+        function navigateQuiz(dir) {
+            playSound('click');
+            const newIndex = currentQuizIndex + dir;
+            if(newIndex >= 0 && newIndex < 25) {
+                currentQuizIndex = newIndex;
+                renderQuizQuestion();
+            } else if(newIndex === 25) {
+                confirmSubmitQuiz();
+            }
+        }
+
+        function renderQuizGrid() {
+            const grid = document.getElementById('q-grid');
+            grid.innerHTML = '';
+
+            for(let i = 0; i < 25; i++) {
+                const btn = document.createElement('button');
+                const isAnswered = userAnswers[i] !== null;
+                const isCurrent = i === currentQuizIndex;
+
+                let cls = "h-9 w-full rounded-xl font-extrabold text-xs transition flex items-center justify-center ";
+                if(isCurrent) {
+                    cls += "bg-amber-400 text-slate-900 ring-2 ring-amber-500";
+                } else if(isAnswered) {
+                    cls += "bg-brand-red text-white";
+                } else {
+                    cls += "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700";
+                }
+
+                btn.className = cls;
+                btn.innerText = i + 1;
+                btn.onclick = () => {
+                    playSound('click');
+                    currentQuizIndex = i;
+                    renderQuizQuestion();
+                };
+                grid.appendChild(btn);
+            }
+        }
+
+        function updateAnsweredCount() {
+            const count = userAnswers.filter(a => a !== null).length;
+            document.getElementById('quiz-answered-count').innerText = `${count} / 25`;
+        }
+
+        function startQuickQuiz() {
+            switchTab('simulasi');
+            currentQuizIndex = 0;
+            renderQuizQuestion();
+        }
+
+        function confirmSubmitQuiz() {
+            playSound('click');
+            const count = userAnswers.filter(a => a !== null).length;
+            document.getElementById('modal-count').innerText = count;
+            document.getElementById('modal-confirm').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            playSound('click');
+            document.getElementById('modal-confirm').classList.add('hidden');
+        }
+
+        function executeQuizSubmit() {
+            playSound('success');
+            closeModal();
+            if (timerInterval) clearInterval(timerInterval);
+            calculateAndShowResults();
+            switchTab('performa');
+        }
+
+        function calculateAndShowResults() {
+            let correctCount = 0;
+            let catStats = {
+                Sejarah: { total: 0, correct: 0 },
+                Pancasila: { total: 0, correct: 0 },
+                Demokrasi: { total: 0, correct: 0 }
+            };
+
+            quizData.forEach((q, idx) => {
+                const userAns = userAnswers[idx];
+                const cat = q.category;
+                if(!catStats[cat]) catStats[cat] = { total: 0, correct: 0 };
+                
+                catStats[cat].total++;
+                if(userAns === q.answer) {
+                    correctCount++;
+                    catStats[cat].correct++;
+                }
+            });
+
+            const finalScore = Math.round((correctCount / 25) * 100);
+
+            document.getElementById('performa-placeholder').classList.add('hidden');
+            document.getElementById('performa-results').classList.remove('hidden');
+
+            document.getElementById('final-score-val').innerText = finalScore;
+            document.getElementById('final-score-ratio').innerText = `${correctCount} dari 25 Soal Benar`;
+
+            const sejPct = Math.round((catStats['Sejarah'].correct / catStats['Sejarah'].total) * 100) || 0;
+            const panPct = Math.round((catStats['Pancasila'].correct / catStats['Pancasila'].total) * 100) || 0;
+            const uudPct = Math.round((catStats['Demokrasi'].correct / catStats['Demokrasi'].total) * 100) || 0;
+
+            document.getElementById('cat-score-sejarah').innerText = `${sejPct}%`;
+            document.getElementById('cat-bar-sejarah').style.width = `${sejPct}%`;
+
+            document.getElementById('cat-score-pancasila').innerText = `${panPct}%`;
+            document.getElementById('cat-bar-pancasila').style.width = `${panPct}%`;
+
+            document.getElementById('cat-score-uud').innerText = `${uudPct}%`;
+            document.getElementById('cat-bar-uud').style.width = `${uudPct}%`;
+
+            const statusBadge = document.getElementById('score-status-badge');
+            const feedbackText = document.getElementById('score-feedback-text');
+            if(finalScore >= 80) {
+                statusBadge.className = "px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-bold text-xs border border-emerald-500/30 uppercase tracking-wider";
+                statusBadge.innerText = "Sangat Baik - SIAP ASTS!";
+                feedbackText.innerText = "Luar biasa! Pemahaman kamu terhadap materi Pancasila dan Demokrasi UUD 1945 sudah sangat matang.";
+            } else if(finalScore >= 60) {
+                statusBadge.className = "px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 font-bold text-xs border border-amber-500/30 uppercase tracking-wider";
+                statusBadge.innerText = "Cukup Baik - Perlu Review";
+                feedbackText.innerText = "Hasil sudah cukup baik, namun masih ada beberapa tanggal penting atau pasal yang perlu direview kembali.";
+            } else {
+                statusBadge.className = "px-3 py-1 rounded-full bg-red-500/20 text-red-300 font-bold text-xs border border-red-500/30 uppercase tracking-wider";
+                statusBadge.innerText = "Perlu Pendalaman";
+                feedbackText.innerText = "Jangan berkecil hati! Pelajari kembali materi rangkuman dan gunakan flashcard untuk melatih hafalan.";
+            }
+
+            renderReviewList();
+        }
+
+        function renderReviewList() {
+            const container = document.getElementById('review-questions-list');
+            container.innerHTML = '';
+
+            const optionLabels = ["A", "B", "C", "D"];
+
+            quizData.forEach((q, idx) => {
+                const userAns = userAnswers[idx];
+                const isCorrect = userAns === q.answer;
+
+                const item = document.createElement('div');
+                item.className = `p-4 rounded-2xl border text-xs sm:text-sm ${
+                    isCorrect 
+                        ? 'border-emerald-200 dark:border-emerald-900/50 bg-emerald-50/40 dark:bg-emerald-950/20' 
+                        : 'border-red-200 dark:border-red-900/50 bg-red-50/40 dark:bg-red-950/20'
+                } space-y-3`;
+
+                item.innerHTML = `
+                    <div class="flex items-start justify-between gap-2">
+                        <span class="font-bold text-slate-800 dark:text-slate-100">
+                            No. ${idx + 1}. ${q.question}
+                        </span>
+                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold shrink-0 ${
+                            isCorrect ? 'bg-emerald-100 dark:bg-emerald-900 text-emerald-800 dark:text-emerald-300' : 'bg-red-100 dark:bg-red-900 text-brand-red dark:text-red-300'
+                        }">
+                            ${isCorrect ? 'BENAR' : 'SALAH'}
+                        </span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                        <div class="p-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                            <span class="text-slate-400 block font-semibold text-[10px]">Jawaban Kamu:</span>
+                            <span class="font-bold ${isCorrect ? 'text-emerald-600 dark:text-emerald-400' : 'text-brand-red dark:text-red-400'}">
+                                ${userAns !== null ? optionLabels[userAns] + '. ' + q.options[userAns] : 'Tidak dijawab'}
+                            </span>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                            <span class="text-slate-400 block font-semibold text-[10px]">Kunci Jawaban Benar:</span>
+                            <span class="font-bold text-emerald-600 dark:text-emerald-400">
+                                ${optionLabels[q.answer]}. ${q.options[q.answer]}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="p-3 rounded-xl bg-slate-800 dark:bg-slate-950 text-slate-200 text-xs leading-relaxed border border-slate-700">
+                        <strong class="text-amber-400 block text-[11px] mb-0.5"><i class="fa-solid fa-lightbulb"></i> Pembahasan:</strong>
+                        ${q.explanation}
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function resetQuiz() {
+            playSound('click');
+            userAnswers = new Array(25).fill(null);
+            currentQuizIndex = 0;
+            timeLeftSeconds = 1800;
+            renderQuizQuestion();
+            switchTab('simulasi');
+        }
+    </script>
+</body>
+</html>

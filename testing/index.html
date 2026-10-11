@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galaxy I Love You 3D</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: #000;
+      font-family: sans-serif;
+    }
+    #canvas-container {
+      width: 100vw;
+      height: 100vh;
+    }
+    .message {
+      position: absolute;
+      top: 10%;
+      width: 100%;
+      text-align: center;
+      color: #ff77ff;
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px #ff00ff;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="message">Scroll / Drag buat geser tampilan 3D ✨</div>
+  <div id="canvas-container"></div>
+
+  <!-- Three.js & OrbitControls dari CDN -->
+  <script src="[https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js](https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js)"></script>
+  <script src="[https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js](https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js)"></script>
+
+  <script>
+    // 1. Setup Scene, Camera, Renderer
+    const container = document.getElementById('canvas-container');
+    const scene = new THREE.Scene();
+    
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 20, 30);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    container.appendChild(renderer.domElement);
+
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+
+    // 2. Buat Teks "I LOVE YOU" di Canvas 2D untuk Mengambil Koordinat Pixel
+    function createTextParticles() {
+      const canvas2d = document.createElement('canvas');
+      const ctx = canvas2d.getContext('2d');
+      canvas2d.width = 400;
+      canvas2d.height = 100;
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'Bold 40px Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText('I LOVE YOU', 200, 60);
+
+      const imgData = ctx.getImageData(0, 0, 400, 100);
+      const positions = [];
+
+      // Sampling pixel yang berisi warna (teks)
+      for (let y = 0; y < 100; y += 2) {
+        for (let x = 0; x < 400; x += 2) {
+          const index = (y * 400 + x) * 4;
+          const alpha = imgData.data[index + 3];
+          if (alpha > 128) {
+            // Ubah koordinat 2D pixel ke skala 3D
+            const posX = (x - 200) * 0.12;
+            const posY = (50 - y) * 0.12;
+            const posZ = (Math.random() - 0.5) * 1.5; // Sedikit tebal 3D
+            positions.push(posX, posY, posZ);
+          }
+        }
+      }
+      return new Float32Array(positions);
+    }
+
+    // 3. Buat Partikel Teks
+    const textCoords = createTextParticles();
+    const textGeometry = new THREE.BufferGeometry();
+    textGeometry.setAttribute('position', new THREE.BufferAttribute(textCoords, 3));
+
+    const textMaterial = new THREE.PointsMaterial({
+      color: 0xff3399,
+      size: 0.25,
+      transparent: true,
+      blending: THREE.AdditiveBlending
+    });
+
+    const textParticles = new THREE.Points(textGeometry, textMaterial);
+    scene.add(textParticles);
+
+    // 4. Buat Pusaran Galaksi di Sekitar Teks
+    const galaxyCount = 12000;
+    const galaxyGeometry = new THREE.BufferGeometry();
+    const galaxyPositions = new Float32Array(galaxyCount * 3);
+    const galaxyColors = new Float32Array(galaxyCount * 3);
+
+    const colorInside = new THREE.Color('#ff66cc');
+    const colorOutside = new THREE.Color('#4400cc');
+
+    for (let i = 0; i < galaxyCount; i++) {
+      // Posisi Spiral
+      const radius = Math.random() * 40 + 5;
+      const spinAngle = radius * 0.3;
+      const branchAngle = ((i % 3) * 2 * Math.PI) / 3;
+
+      const randomX = (Math.random() - 0.5) * 3;
+      const randomY = (Math.random() - 0.5) * 3;
+      const randomZ = (Math.random() - 0.5) * 3;
+
+      const x = Math.cos(branchAngle + spinAngle) * radius + randomX;
+      const y = randomY;
+      const z = Math.sin(branchAngle + spinAngle) * radius + randomZ;
+
+      galaxyPositions[i * 3] = x;
+      galaxyPositions[i * 3 + 1] = y;
+      galaxyPositions[i * 3 + 2] = z;
+
+      // Warna Gradasi Galaksi
+      const mixedColor = colorInside.clone().lerp(colorOutside, radius / 45);
+      galaxyColors[i * 3] = mixedColor.r;
+      galaxyColors[i * 3 + 1] = mixedColor.g;
+      galaxyColors[i * 3 + 2] = mixedColor.b;
+    }
+
+    galaxyGeometry.setAttribute('position', new THREE.BufferAttribute(galaxyPositions, 3));
+    galaxyGeometry.setAttribute('color', new THREE.BufferAttribute(galaxyColors, 3));
+
+    const galaxyMaterial = new THREE.PointsMaterial({
+      size: 0.15,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.8,
+      blending: THREE.AdditiveBlending
+    });
+
+    const galaxyParticles = new THREE.Points(galaxyGeometry, galaxyMaterial);
+    scene.add(galaxyParticles);
+
+    // 5. Loop Animasi
+    const clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+      const elapsedTime = clock.getElapsedTime();
+
+      // Putar galaksi & teks perlahan
+      galaxyParticles.rotation.y = elapsedTime * 0.05;
+      textParticles.rotation.y = elapsedTime * 0.08;
+
+      // Efek mengapung perlahan pada teks
+      textParticles.position.y = Math.sin(elapsedTime * 1.5) * 0.5;
+
+      controls.update();
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    // Responsive Canvas saat Window Di-resize
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>
