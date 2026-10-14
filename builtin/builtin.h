@@ -3,29 +3,26 @@
 
 #include "../libconfig.h"
 
-
 /**
  * @note "This Header (Builtin) Has under maintance/Construction"
- * @a On specificly No Specific Compiler mode !(Clang/Intel_Compiler/GCC/MSC_VER),
- *    There will return the same @param int x
+ * @a On specificly No Specific Compiler mode
+ * !(Clang/Intel_Compiler/GCC/MSC_VER), There will return the same @param int x
  *                               @return x;
- * 
+ *
  *
  * @deprecated (ICC_COMPILERS) or Specificaly Baremetal/Compiler
- *             had not support (4 Major Compiler) 
+ *             had not support (4 Major Compiler)
  */
-#if defined(__IAR_SYSTEMS_ICC__) || (defined(INP_BAREMETAL_MODE__) && INP_BAREMETAL_MODE__ == 1)
-#warning \
-"This Header In Under Construction, \
+#if defined(__IAR_SYSTEMS_ICC__) ||                                            \
+    (defined(INP_BAREMETAL_MODE__) && INP_BAREMETAL_MODE__ == 1)
+#warning "This Header In Under Construction, \
 Only in There not supporting Compiler, there return the same value on (int x) (return x;). \
 "
 #endif
 
-#warning 
+#warning
 
 INP_CPP_OPEN__
-
-
 
 /**
  * @brief :
@@ -37,14 +34,14 @@ INP_CPP_OPEN__
  */
 INP_INLINE_ INP_API_ INP_LEAF_ INP_HOT_ INP_NOTHROW_ int
 builtin_popcount_(unsigned int x) INP_NOEXCEPT_ {
- #if defined(__has_builtin) && __has_builtin(__builtin_popcountl)
+#if defined(__has_builtin) && __has_builtin(__builtin_popcountl)
   return __builtin_popcount(x);
- #elif  defined(_MSC_VER)
-  return __popcnt(x);	 
- #else
- return x; 
-//  Try to repaired them.
- #endif
+#elif defined(_MSC_VER)
+  return __popcnt(x);
+#else
+  return x;
+  //  Try to repaired them.
+#endif
 }
 
 /**
@@ -56,13 +53,13 @@ builtin_popcount_(unsigned int x) INP_NOEXCEPT_ {
  */
 INP_INLINE_ INP_API_ INP_LEAF_ INP_HOT_ INP_NOTHROW_ int
 builtin_popcountl_(unsigned long x) INP_NOEXCEPT_ {
-   #if defined(__has_builtin) && __has_builtin(__builtin_popcountl)
+#if defined(__has_builtin) && __has_builtin(__builtin_popcountl)
   return __builtin_popcountl(x);
- #elif  defined(_MSC_VER)
-  return __popcnt(x);	 
- #else
+#elif defined(_MSC_VER)
+  return __popcnt(x);
+#else
   return x;
- #endif
+#endif
 };
 
 /**
@@ -78,7 +75,7 @@ builtin_popcountll_(unsigned long long x) INP_NOEXCEPT_ {
 #if defined(__has_builtin) && __has_builtin(__builtin_popcountll)
   return __builtin_popcountll(x);
 #elif defined(_MSC_VER)
- return __popcnt64(x);
+  return __popcnt64(x);
 #else
   return x;
 #endif
@@ -96,7 +93,7 @@ builtin_popcount_zero_(unsigned int x) INP_NOEXCEPT_ {
 #if defined(__has_builtin) && __has_builtin(__builtin_popcount)
   return __builtin_popcount(~x);
 #elif defined(_MSC_VER)
- return __popcnt(~x);
+  return __popcnt(~x);
 #else
   return x;
 #endif
@@ -111,10 +108,10 @@ builtin_popcount_zero_(unsigned int x) INP_NOEXCEPT_ {
  */
 INP_INLINE_ INP_API_ INP_LEAF_ INP_HOT_ INP_NOTHROW_ int
 builtin_popcountl_zero_(unsigned long x) INP_NOEXCEPT_ {
-  #if defined(__has_builtin) && __has_builtin(__builtin_popcountl)
+#if defined(__has_builtin) && __has_builtin(__builtin_popcountl)
   return __builtin_popcountl(~x);
 #elif defined(_MSC_VER)
- return __popcnt(~x);
+  return __popcnt(~x);
 #else
   return x;
 #endif
@@ -131,7 +128,7 @@ builtin_popcountll_zero_(unsigned long long x) INP_NOEXCEPT_ {
 #if defined(__has_builtin) && __has_builtin(__builtin_popcountll)
   return __builtin_popcountll(~x);
 #elif defined(_MSC_VER)
- return __popcnt64(~x);
+  return __popcnt64(~x);
 #else
   return x;
 #endif
