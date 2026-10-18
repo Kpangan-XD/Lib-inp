@@ -1,5 +1,5 @@
-#ifndef INP_CHECK_ERROR
-#define INP_CHECK_ERROR
+#ifndef INP_CHECK_ERROR_BUILTIN_
+#define INP_CHECK_ERROR_BUILTIN_
 
 /**
 * This file include -*- C++ -*- for everyone.

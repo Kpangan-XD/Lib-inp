@@ -1,7 +1,7 @@
 #ifndef INP_BUILTIN_HH
 #define INP_BUILTIN_HH
-
 #include "../libconfig.h"
+
 
 /**
  * @note "This Header (Builtin) Has under maintance/Construction"
@@ -13,14 +13,7 @@
  * @deprecated (ICC_COMPILERS) or Specificaly Baremetal/Compiler
  *             had not support (4 Major Compiler)
  */
-#if defined(__IAR_SYSTEMS_ICC__) ||                                            \
-    (defined(INP_BAREMETAL_MODE__) && INP_BAREMETAL_MODE__ == 1)
-#warning "This Header In Under Construction, \
-Only in There not supporting Compiler, there return the same value on (int x) (return x;). \
-"
-#endif
-
-#warning
+ #include "../check/check_builtin.h"
 
 INP_CPP_OPEN__
 
@@ -29,12 +22,12 @@ INP_CPP_OPEN__
  * To counting (1) Bits on Biner
  *
  *
- * @param unsigned int int x
+ * @param unsigned int x
  * @return INP_API_
  */
 INP_INLINE_ INP_API_ INP_LEAF_ INP_HOT_ INP_NOTHROW_ int
 builtin_popcount_(unsigned int x) INP_NOEXCEPT_ {
-#if defined(__has_builtin) && __has_builtin(__builtin_popcountl)
+#if defined(__has_builtin) && __has_builtin(__builtin_popcount)
   return __builtin_popcount(x);
 #elif defined(_MSC_VER)
   return __popcnt(x);
@@ -142,7 +135,17 @@ builtin_popcountll_zero_(unsigned long long x) INP_NOEXCEPT_ {
  */
 INP_INLINE_ INP_API_ INP_LEAF_ INP_HOT_ INP_NOTHROW_ int
 builtin_clz_(unsigned int x) INP_NOEXCEPT_ {
+#if defined(__has_builtin) && __has_builtin(__builtin_clz)
   return __builtin_clz(x);
+#elif defined(_MSC_VER)
+unsigned long idx;
+if(_BitScanReverse(&idx, x)){
+  return 31 - idx;
+}
+  return 32;
+#else
+  return x;
+#endif
 };
 
 /**

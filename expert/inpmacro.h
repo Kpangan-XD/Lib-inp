@@ -3,17 +3,13 @@
 
 #if defined(__cplusplus)
 
-# define INP_C_OPEN__ \
-extern "C" { 
+# define INP_C_OPEN__    extern "C" { 
 
-# define INP_C_CLOSE__ \
-} 
+# define INP_C_CLOSE__   } 
 
-# define INP_CPP_OPEN__ \
-namespace inp {
+# define INP_CPP_OPEN__  namespace inp {
 
-# define INP_CPP_CLOSE__ \
-}
+# define INP_CPP_CLOSE__ }
 
 #else 
 
