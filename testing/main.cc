@@ -2,6 +2,7 @@
 #include <new>
 using std::cout, std::endl;
 
+std::string daftarnama[3] = {"Hello", "Note","Good"};
 
 template<typename T, int r, int c>
 struct Array2d
