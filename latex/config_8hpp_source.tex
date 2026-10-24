@@ -1,0 +1,103 @@
+\doxysection{config.\+hpp}
+\hypertarget{config_8hpp_source}{}\label{config_8hpp_source}\index{inp/config.hpp@{inp/config.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ INP\_CONFIG\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ INP\_CONFIG\_HPP}\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{comment}{/*\ Not\ same\ like\ define.hpp,\ but\ there\ a\ config\ a\ complex\ for\ definitions,}}
+\DoxyCodeLine{00033\ \textcolor{comment}{\ *\ for\ \#define\ not\ have\ filling\ anything,\ THROW\ to\ <define.hpp>,}}
+\DoxyCodeLine{00034\ \textcolor{comment}{\ *\ for\ \#define\ have\ a\ filling,\ OR\ have\ a\ complex\ function,\ try\ to\ THROW\ <config.hpp>}}
+\DoxyCodeLine{00035\ \textcolor{comment}{\ ***/}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{comment}{//\ \ \_\_ATTRIBUTE\_\_(())}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{comment}{//\ NOTHROW}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#include\ <inpconfig.hh>}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ INP\_INLINE\_\ \textcolor{keywordtype}{void}\ name()\{}
+\DoxyCodeLine{00045\ \ \ \ \ }
+\DoxyCodeLine{00046\ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{comment}{//\ no\ calling\ func,\ remove\ any\ bunc\ to\ highly\ speed\ and\ reliable}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#define\ \_\_ATT\_LEAF\ \_\_attribute\_\_((\_\_leaf\_\_))}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{comment}{//\ }}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#define\ \_\_ATT\_COLD\ \_\_attribute\_\_((\_\_cold\_\_))}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{comment}{//\ }}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#define\ \_\_ATT\_HOT\ \_\_attribute\_\_((\_\_hot\_\_))}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{comment}{//}}
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#define\ \_\_ATT\_INLINE\ inline\ \_\_attribute\_\_((\_\_always\_inline\_\_))}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{comment}{//\ \ }}
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#define\ \_\_ATT\_NOTHROW\ \_\_attribute\_\_((\_\_nothrow\_\_))}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \textcolor{comment}{//\ }}
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\#define\ \_\_ATT\_NORETURN\ \_\_attribute\_\_((\_\_noreturn\_\_))}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{comment}{//\ }}
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#define\ \_\_ATT\_DEPR(msg)\ \_\_attribute\_\_((\_\_deprecated\_\_(msg)))}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \textcolor{comment}{//\ }}
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#define\ \_\_ATT\_FLATTEN\ \_\_attribute\_\_((\_\_flatten\_\_))}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \textcolor{comment}{//\ }}
+\DoxyCodeLine{00073\ \textcolor{preprocessor}{\#define\ \_\_ATT\_NAKED\ \_\_attribute\_\_((\_\_naked\_\_))}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \textcolor{comment}{//\ }}
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\#define\ \_\_ATT\_NONNULL(pointer)\ \_\_attribute\_\_((\_\_nonnull\_\_(pointer)))}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \textcolor{comment}{//\ }}
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#define\ \_\_ATT\_UNUSED\ \_\_attribute\_\_((\_\_unused\_\_))}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \textcolor{comment}{//\ }}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#define\ \_\_ATT\_CONST\ \_\_attribute\_\_((\_\_const\_\_))}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \textcolor{comment}{//\ }}
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\#define\ \_\_ATT\_USED\ \_\_attribute\_\_((\_\_used\_\_))}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \textcolor{comment}{//\ }}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\#define\ \_\_ATT\_FORMAT(...)\ \_\_attribute\_\_((\_\_format\_\_(\_\_VA\_ARGS\_\_)))}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \textcolor{comment}{//\ }}
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\#define\ \_\_ATT\_CONSTRUCTOR(priority)\ \_\_attribute\_\_((\_\_constructor\_\_(priority)))}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \textcolor{comment}{//\ }}
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\#define\ \_\_ATT\_ALIAS(type)\ \_\_attribute\_\_((\_\_alias\_\_(type)))}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \textcolor{comment}{//\ }}
+\DoxyCodeLine{00097\ \textcolor{comment}{//\ }}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \textcolor{comment}{//\ \_\_attribute\_\_((con))}}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \textcolor{comment}{//\ nothrow,\ leaf,\ cold\ and\ deprecated\ for\ function}}
+\DoxyCodeLine{00104\ \textcolor{preprocessor}{\#define\ \_\_ATT\_NOHOT\_DEPR(text)\ \ \(\backslash\)}}
+\DoxyCodeLine{00105\ \textcolor{preprocessor}{\_\_attribute\_\_((\_\_nothrow\_\_,\ \_\_leaf\_\_,\ \_\_cold\_\_,\_\_deprecated\_\_(text)\ ))}}
+\DoxyCodeLine{00106\ \textcolor{preprocessor}{\#define\ \_\_ATT\_NOCOLD\_DEPR(text)\ \ \(\backslash\)}}
+\DoxyCodeLine{00107\ \textcolor{preprocessor}{\_\_attribute\_\_((\_\_nothrow\_\_,\ \_\_leaf\_\_,\ \_\_hot\_\_,\_\_deprecated\_\_(text)\ ))}}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \textcolor{preprocessor}{\#define\ \_\_ATT\_NOHOT\_\ \ \(\backslash\)}}
+\DoxyCodeLine{00110\ \textcolor{preprocessor}{\_\_attribute\_\_((\_\_nothrow\_\_,\ \_\_leaf\_\_,\ \_\_cold\_\_\ ))}}
+\DoxyCodeLine{00111\ \textcolor{preprocessor}{\#define\ \_\_ATT\_NOCOLD\_\ \ \(\backslash\)}}
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\_\_attribute\_\_((\_\_nothrow\_\_,\ \_\_leaf\_\_,\ \_\_hot\_\_\ ))}}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \textcolor{comment}{//\ sys}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \textcolor{preprocessor}{\#define\ \_\_LAPIC\_BASE\ \ 0xFEE00000}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \textcolor{preprocessor}{\#define\ \_\_LAPIC\_ICR\_LOW\ \ \ \ \ \ \ \ \ (*(volatile\ uint32\_t*)(LAPIC\_BASE\ +\ 0x300))}}
+\DoxyCodeLine{00120\ \textcolor{preprocessor}{\#define\ \_\_LAPIC\_ICR\_HIGH\ \ \ \ \ \ \ \ (*(volatile\ uint32\_t*)(LAPIC\_BASE\ +\ 0x310))}}
+\DoxyCodeLine{00121\ \textcolor{preprocessor}{\#define\ \_\_LAPIC\_SPURIOUS\ \ \ \ \ \ \ \ (*(volatile\ uint32\_t*)(LAPIC\_BASE\ +\ 0x0F0))}}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \textcolor{comment}{//\ sys}}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

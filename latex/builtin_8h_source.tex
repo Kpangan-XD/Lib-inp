@@ -1,0 +1,109 @@
+\doxysection{builtin.\+h}
+\hypertarget{builtin_8h_source}{}\label{builtin_8h_source}\index{builtin/builtin.h@{builtin/builtin.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ INP\_BUILTIN\_HH}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ INP\_BUILTIN\_HH}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}../libconfig.h"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\ \#include\ "{}../check/check\_builtin.h"{}}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ INP\_CPP\_OPEN\_\_}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00028\ INP\_INLINE\_\ INP\_API\_\ INP\_LEAF\_\ INP\_HOT\_\ INP\_NOTHROW\_\ \textcolor{keywordtype}{int}}
+\DoxyCodeLine{00029\ builtin\_popcount\_(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ x)\ INP\_NOEXCEPT\_\ \{}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#if\ defined(\_\_has\_builtin)\ \&\&\ \_\_has\_builtin(\_\_builtin\_popcount)}}
+\DoxyCodeLine{00031\ \ \ \textcolor{keywordflow}{return}\ \_\_builtin\_popcount(x);}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#elif\ defined(\_MSC\_VER)}}
+\DoxyCodeLine{00033\ \ \ \textcolor{keywordflow}{return}\ \_\_popcnt(x);}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00035\ \ \ \textcolor{keywordflow}{return}\ x;}
+\DoxyCodeLine{00036\ \ \ \textcolor{comment}{//\ \ Try\ to\ repaired\ them.}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00038\ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00047\ INP\_INLINE\_\ INP\_API\_\ INP\_LEAF\_\ INP\_HOT\_\ INP\_NOTHROW\_\ \textcolor{keywordtype}{int}}
+\DoxyCodeLine{00048\ builtin\_popcountl\_(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ x)\ INP\_NOEXCEPT\_\ \{}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#if\ defined(\_\_has\_builtin)\ \&\&\ \_\_has\_builtin(\_\_builtin\_popcountl)}}
+\DoxyCodeLine{00050\ \ \ \textcolor{keywordflow}{return}\ \_\_builtin\_popcountl(x);}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#elif\ defined(\_MSC\_VER)}}
+\DoxyCodeLine{00052\ \ \ \textcolor{keywordflow}{return}\ \_\_popcnt(x);}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00054\ \ \ \textcolor{keywordflow}{return}\ x;}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00056\ \};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ INP\_INLINE\_\ INP\_API\_\ INP\_LEAF\_\ INP\_HOT\_\ INP\_NOTHROW\_\ \textcolor{keywordtype}{int}}
+\DoxyCodeLine{00067\ builtin\_popcountll\_(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ x)\ INP\_NOEXCEPT\_\ \{}
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#if\ defined(\_\_has\_builtin)\ \&\&\ \_\_has\_builtin(\_\_builtin\_popcountll)}}
+\DoxyCodeLine{00069\ \ \ \textcolor{keywordflow}{return}\ \_\_builtin\_popcountll(x);}
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#elif\ defined(\_MSC\_VER)}}
+\DoxyCodeLine{00071\ \ \ \textcolor{keywordflow}{return}\ \_\_popcnt64(x);}
+\DoxyCodeLine{00072\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00073\ \ \ \textcolor{keywordflow}{return}\ x;}
+\DoxyCodeLine{00074\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00075\ \};}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00084\ INP\_INLINE\_\ INP\_API\_\ INP\_LEAF\_\ INP\_HOT\_\ INP\_NOTHROW\_\ \textcolor{keywordtype}{int}}
+\DoxyCodeLine{00085\ builtin\_popcount\_zero\_(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ x)\ INP\_NOEXCEPT\_\ \{}
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\#if\ defined(\_\_has\_builtin)\ \&\&\ \_\_has\_builtin(\_\_builtin\_popcount)}}
+\DoxyCodeLine{00087\ \ \ \textcolor{keywordflow}{return}\ \_\_builtin\_popcount(\string~x);}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\#elif\ defined(\_MSC\_VER)}}
+\DoxyCodeLine{00089\ \ \ \textcolor{keywordflow}{return}\ \_\_popcnt(\string~x);}
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00091\ \ \ \textcolor{keywordflow}{return}\ x;}
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00093\ \};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00102\ INP\_INLINE\_\ INP\_API\_\ INP\_LEAF\_\ INP\_HOT\_\ INP\_NOTHROW\_\ \textcolor{keywordtype}{int}}
+\DoxyCodeLine{00103\ builtin\_popcountl\_zero\_(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ x)\ INP\_NOEXCEPT\_\ \{}
+\DoxyCodeLine{00104\ \textcolor{preprocessor}{\#if\ defined(\_\_has\_builtin)\ \&\&\ \_\_has\_builtin(\_\_builtin\_popcountl)}}
+\DoxyCodeLine{00105\ \ \ \textcolor{keywordflow}{return}\ \_\_builtin\_popcountl(\string~x);}
+\DoxyCodeLine{00106\ \textcolor{preprocessor}{\#elif\ defined(\_MSC\_VER)}}
+\DoxyCodeLine{00107\ \ \ \textcolor{keywordflow}{return}\ \_\_popcnt(\string~x);}
+\DoxyCodeLine{00108\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00109\ \ \ \textcolor{keywordflow}{return}\ x;}
+\DoxyCodeLine{00110\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00111\ \};}
+\DoxyCodeLine{00119\ INP\_INLINE\_\ INP\_API\_\ INP\_LEAF\_\ INP\_HOT\_\ INP\_NOTHROW\_\ \textcolor{keywordtype}{int}}
+\DoxyCodeLine{00120\ builtin\_popcountll\_zero\_(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ x)\ INP\_NOEXCEPT\_\ \{}
+\DoxyCodeLine{00121\ \textcolor{preprocessor}{\#if\ defined(\_\_has\_builtin)\ \&\&\ \_\_has\_builtin(\_\_builtin\_popcountll)}}
+\DoxyCodeLine{00122\ \ \ \textcolor{keywordflow}{return}\ \_\_builtin\_popcountll(\string~x);}
+\DoxyCodeLine{00123\ \textcolor{preprocessor}{\#elif\ defined(\_MSC\_VER)}}
+\DoxyCodeLine{00124\ \ \ \textcolor{keywordflow}{return}\ \_\_popcnt64(\string~x);}
+\DoxyCodeLine{00125\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00126\ \ \ \textcolor{keywordflow}{return}\ x;}
+\DoxyCodeLine{00127\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00128\ \};}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00136\ INP\_INLINE\_\ INP\_API\_\ INP\_LEAF\_\ INP\_HOT\_\ INP\_NOTHROW\_\ \textcolor{keywordtype}{int}}
+\DoxyCodeLine{00137\ builtin\_clz\_(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ x)\ INP\_NOEXCEPT\_\ \{}
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#if\ defined(\_\_has\_builtin)\ \&\&\ \_\_has\_builtin(\_\_builtin\_clz)}}
+\DoxyCodeLine{00139\ \ \ \textcolor{keywordflow}{return}\ \_\_builtin\_clz(x);}
+\DoxyCodeLine{00140\ \textcolor{preprocessor}{\#elif\ defined(\_MSC\_VER)}}
+\DoxyCodeLine{00141\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ idx;}
+\DoxyCodeLine{00142\ \textcolor{keywordflow}{if}(\_BitScanReverse(\&idx,\ x))\{}
+\DoxyCodeLine{00143\ \ \ \textcolor{keywordflow}{return}\ 31\ -\/\ idx;}
+\DoxyCodeLine{00144\ \}}
+\DoxyCodeLine{00145\ \ \ \textcolor{keywordflow}{return}\ 32;}
+\DoxyCodeLine{00146\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00147\ \ \ \textcolor{keywordflow}{return}\ x;}
+\DoxyCodeLine{00148\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00149\ \};}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00157\ INP\_INLINE\_\ INP\_API\_\ INP\_LEAF\_\ INP\_HOT\_\ INP\_NOTHROW\_\ \textcolor{keywordtype}{int}}
+\DoxyCodeLine{00158\ builtin\_ctz\_(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ x)\ INP\_NOEXCEPT\_\ \{}
+\DoxyCodeLine{00159\ \textcolor{preprocessor}{\#if\ defined(\_\_has\_builtin)\ \&\&\ \_\_has\_builtin(\_\_builtin\_ctz)}}
+\DoxyCodeLine{00160\ \ \ \textcolor{keywordflow}{return}\ \_\_builtin\_ctz(x);}
+\DoxyCodeLine{00161\ \textcolor{preprocessor}{\#elif}}
+\DoxyCodeLine{00162\ \ \ \textcolor{keywordflow}{return}\ x;}
+\DoxyCodeLine{00163\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00164\ \};}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ INP\_CPP\_CLOSE\_\_}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

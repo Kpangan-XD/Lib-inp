@@ -1,0 +1,23 @@
+\doxysection{check\+\_\+builtin.\+h}
+\hypertarget{check__builtin_8h_source}{}\label{check__builtin_8h_source}\index{check/check\_builtin.h@{check/check\_builtin.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ INP\_CHECK\_ERROR\_BUILTIN\_}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ INP\_CHECK\_ERROR\_BUILTIN\_}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#if\ \(\backslash\)}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{defined(\_\_IAR\_SYSTEMS\_ICC\_\_)\(\backslash\)}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{||\(\backslash\)}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{(defined(INP\_BAREMETAL\_MODE\_\_)\ \&\&\ INP\_BAREMETAL\_MODE\_\_\ ==\ 1)}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#warning\ \(\backslash\)}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{"{}This\ Header\ In\ Under\ Construction,\ \(\backslash\)}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{Only\ in\ There\ not\ supporting\ Compiler,\ there\ return\ the\ same\ value\ on\ (int\ x)\ (return\ x;).\ \(\backslash\)}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{"{}}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

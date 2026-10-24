@@ -1,0 +1,24 @@
+\doxysection{inpos.\+h}
+\hypertarget{inpos_8h_source}{}\label{inpos_8h_source}\index{essential/inpos.h@{essential/inpos.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ INP\_OS\_HH}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ INP\_OS\_HH}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#if\ defined(\_WIN32)\ ||\ defined(\_WIN64)}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#\ include\ <windows.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#\ \ if\ INP\_NEED\_INTRIN\_\_\ ==\ 1\ \&\&\ defined(INP\_NEED\_INTRIN\_\_)}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#\ \ \ include\ <intrin.h>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#\ \ endif}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#if\ defined(\_\_linux\_\_)\ ||\ defined(\_\_gnu\_linux\_\_)}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#\ include\ <unistd.h>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#\ \ if\ INP\_NEED\_INTRIN\_\_\ ==\ 1\ \&\&\ defined(INP\_NEED\_INTRIN\_\_)}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#\ \ \ include\ <x86intrin.h>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#\ \ endif}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
